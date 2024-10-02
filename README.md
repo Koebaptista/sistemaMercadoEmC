@@ -31,13 +31,17 @@ O sistema conta com estruturas para armazenar informações dos produtos e dos i
 - Contadores para manter o número de produtos e itens no carrinho.
 
 ## Funções Principais
-- **Cadastrar Produto**: Permite o cadastro de novos produtos com código, nome e preço.
-- **Listar Produtos**: Lista todos os produtos cadastrados.
-- **Atualizar Produto**: Permite atualizar o nome e preço de um produto existente.
-- **Comprar Produto**: Adiciona produtos ao carrinho com a quantidade desejada.
-- **Visualizar Carrinho**: Exibe os produtos adicionados ao carrinho.
-- **Remover Produto do Carrinho**: Remove um produto do carrinho com base no código.
-- **Fechar Pedido**: Calcula o total da compra, exibe a fatura e esvazia o carrinho.
+- **cadastrarProduto**: Permite o cadastro de novos produtos com código, nome e preço. Inclui validações para garantir que o código do produto seja único e que o preço seja positivo.
+- **listarProdutos**: Lista todos os produtos cadastrados no sistema, exibindo informações detalhadas, como código, nome e preço, utilizando a função auxiliar infoProduto.
+- **atualizarProduto**: Permite atualizar o nome e o preço de um produto existente. O produto é identificado pelo seu código, e o usuário pode modificar as informações conforme necessário.
+- **comprarProduto**: Adiciona produtos ao carrinho com a quantidade desejada. A função verifica se o produto já está no carrinho usando a função auxiliar temNoCarrinho. Se estiver, atualiza a quantidade; caso contrário, adiciona um novo item ao carrinho.
+- **visualizarCarrinho**: Exibe os produtos adicionados ao carrinho, mostrando detalhes como o código, nome, preço e quantidade de cada produto.
+- **removerProdutoCarrinho**: Permite a remoção de um produto do carrinho com base no código informado pelo usuário. Se o produto estiver no carrinho, ele é removido, e o carrinho é atualizado.
+- **fecharPedido**: Calcula o total da compra, exibe a fatura dos produtos comprados e esvazia o carrinho para futuras operações.
+
+## Funções Auxiliares
+- **infoProduto**: Recebe um produto e exibe suas informações, incluindo o código, nome e preço, formatando o preço com o símbolo R$.
+- **temNoCarrinho**:  Verifica se um produto, identificado pelo código, já está presente no carrinho. Retorna um ponteiro para o item no carrinho se encontrado, ou NULL caso contrário. Utilizada pela função Comprar Produto para decidir se deve atualizar um item existente ou adicionar um novo.
 
 ## Tratamento de Entradas
 - **Validação de Dados**: Todas as entradas do usuário são validadas para garantir que correspondam ao tipo esperado (inteiros ou floats positivos).
