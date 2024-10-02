@@ -29,6 +29,8 @@ void comprarProduto();
 void visualizarCarrinho();
 void removerProdutoCarrinho();
 void fecharPedido();
+void infoProduto(Produto prod);
+ItemCarrinho* temNoCarrinho(int codigo);
 
 int main() {
     int opcao;
@@ -78,10 +80,25 @@ int main() {
                 printf("Saindo do sistema...\n");
                 break;
             default:
-                printf("Oppco invalida. Tente novamente.\n");
+                printf("Opcao invalida. Tente novamente.\n");
         }
     } while (opcao != 8);
     return 0;
+}
+
+// Função para exibir informações de um produto
+void infoProduto(Produto prod) {
+    printf("Codigo: %d | Nome: %s | Preco: R$ %.2f\n", prod.codigo, prod.nome, prod.preco);
+}
+
+// Função para verificar se um produto está no carrinho
+ItemCarrinho* temNoCarrinho(int codigo) {
+    for (int i = 0; i < contadorCarrinho; i++) {
+        if (carrinho[i].produto.codigo == codigo) {
+            return &carrinho[i]; // Retorna um ponteiro para o item no carrinho
+        }
+    }
+    return NULL; // Retorna NULL se não encontrar o produto
 }
 
 // Função para cadastrar um novo produto
@@ -134,8 +151,7 @@ void listarProdutos() {
     printf("\n=== Lista de Produtos ===\n");
     // Itera sobre o array de produtos e exibe as informações
     for (int i = 0; i < contadorProdutos; i++) {
-        Produto p = produtos[i];
-        printf("Código: %d | Nome: %s | Preço: R$ %.2f\n", p.codigo, p.nome, p.preco);
+        infoProduto(produtos[i]); // Usando a função infoProduto
     }
 }
 
@@ -221,16 +237,12 @@ void comprarProduto() {
     }
 
     // Verificar se o produto já está no carrinho
-    encontrado = 0;
-    for (int i = 0; i < contadorCarrinho; i++) {
-        if (carrinho[i].produto.codigo == codigo) {
-            carrinho[i].quantidade += quantidade;
-            encontrado = 1;
-            break;
-        }
-    }
-    // Se não estiver no carrinho, adicionar novo item
-    if (!encontrado) {
+    ItemCarrinho* itemCarrinho = temNoCarrinho(codigo);
+    if (itemCarrinho != NULL) {
+        // Produto já no carrinho, atualizar quantidade
+        itemCarrinho->quantidade += quantidade;
+    } else {
+        // Adicionar novo item ao carrinho
         carrinho[contadorCarrinho].produto = prodSelecionado;
         carrinho[contadorCarrinho].quantidade = quantidade;
         contadorCarrinho++;
