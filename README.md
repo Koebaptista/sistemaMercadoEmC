@@ -1,4 +1,4 @@
-# Sistema de Supermercado em C
+# Sistema de Mercado em C
 
 ## Introdução
 Este projeto consiste em um sistema simples de supermercado desenvolvido em linguagem C. O objetivo é implementar funcionalidades básicas de um supermercado, como:
@@ -46,16 +46,18 @@ O sistema conta com estruturas para armazenar informações dos produtos e dos i
 ## Instruções para Compilar e Executar
 
 ### Pré-requisitos
+
 - Um compilador C instalado em seu sistema, como o GCC.
+- Eu utilizei o CodeBlocks para fazer, não recomendo o VsCode pois ele dá uma bugada na hora de executar
 
 ### Passos
 
-1. Salve o código em um arquivo com o nome `supermercado.c`.
+1. Salve o código em um arquivo com o nome `mercado.c`.
 2. Abra o terminal, navegue até o diretório onde o arquivo foi salvo e execute o comando para compilar o código:
    ```bash
-   gcc supermercado.c -o supermercado
+   gcc mercado.c -o mercado
 Execute o programa com o comando:
-./supermercado
+./mercado
 O programa irá iniciar e exibir o menu principal.
 
 ## Funcionalidades Implementadas
